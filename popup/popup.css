@@ -1,0 +1,226 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #181818;
+    color: #e2e2e2;
+    margin: 0;
+    width: 380px;
+}
+
+.container {
+    padding: 16px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.header h1 {
+    font-size: 18px;
+    margin: 0;
+    color: #fff;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #aaa;
+}
+.header button:hover {
+    color: #fff;
+}
+.header .header-action-btn {
+    margin-left: 8px;
+}
+
+.header .back-btn {
+    position: absolute;
+    left: 12px;
+}
+
+/* Notes List */
+#notes-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: -8px;
+    padding: 8px;
+}
+
+.note-item {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #3d3d3d;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.note-header {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-title {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.delete-btn:hover {
+    color: #ff8a80;
+}
+
+.note-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease-out, padding 0.4s ease-out;
+    padding: 0 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    border-top: 1px solid transparent;
+}
+.note-content.expanded {
+    max-height: 500px;
+    opacity: 1;
+    padding: 12px 12px;
+    border-top: 1px solid #3d3d3d;
+}
+.note-content h3 {
+    font-size: 14px;
+    margin: 12px 0 6px 0;
+    color: #eee;
+}
+.note-content h3:first-child { margin-top: 0; }
+.note-content p { margin: 0 0 10px 0; white-space: pre-wrap; color: #ccc; }
+.note-content ul { padding-left: 18px; margin: 0 0 10px 0; }
+.note-content li { margin-bottom: 4px; color: #ccc;}
+
+#empty-message {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    padding: 20px;
+}
+
+/* Common styles for Settings & Manual View */
+.settings-description,
+.input-group {
+    margin-bottom: 12px;
+}
+
+.settings-description {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 0;
+    text-align: center;
+}
+
+#apiKeyInput,
+#manualTitleInput,
+#manualUrlInput,
+#manualTranscriptInput {
+    width: 100%;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    border: 1px solid #4d4d4d;
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#apiKeyInput:focus,
+#manualTitleInput:focus,
+#manualUrlInput:focus,
+#manualTranscriptInput:focus {
+    outline: none;
+    border-color: #3ea6ff;
+}
+
+#manualTranscriptInput {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.or-separator {
+    text-align: center;
+    color: #888;
+    margin: 12px 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#saveButton,
+#generateManualSummaryBtn,
+#fetchTranscriptBtn {
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+#saveButton,
+#generateManualSummaryBtn {
+    background-color: #3ea6ff;
+}
+#saveButton:hover,
+#generateManualSummaryBtn:hover {
+    background-color: #55b3ff;
+}
+
+#fetchTranscriptBtn {
+    background-color: #5a5a5a;
+    margin-bottom: 8px;
+}
+#fetchTranscriptBtn:hover {
+    background-color: #6a6a6a;
+}
+#fetchTranscriptBtn:disabled,
+#generateManualSummaryBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #333;
+}
+
+
+#statusMessage,
+#manualStatusMessage {
+    display: block;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #4caf50;
+    height: 16px;
+    text-align: center;
+}

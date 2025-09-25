@@ -1,0 +1,5 @@
+{
+  "name": "YouTube Video Summarizer",
+  "description": "A Chrome extension to summarize YouTube video transcripts using the Gemini API, displaying the summary in a modal on the video page.",
+  "requestFramePermissions": []
+}
