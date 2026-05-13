@@ -245,22 +245,32 @@ const getTranscript = async () => {
             if (!transcriptOpened) {
                 console.log("Summarizer: Transcript button not in description. Trying 'More actions' menu.");
                 
-                const actionsContainer = await waitForElement("#actions-inner, #actions.ytd-watch-metadata #menu-container");
-                const moreActionsButton = actionsContainer.querySelector('button[aria-label="More actions"]');
-                if (!moreActionsButton) throw new Error("Could not find the 'More actions' (...) button.");
+                const actionsContainer = await waitForElement("#actions-inner, #actions.ytd-watch-metadata #menu-container, #top-row.ytd-watch-metadata");
+                // Try to find the "More" button more robustly (often the button with more_vert icon)
+                let moreActionsButton = actionsContainer.querySelector('button[aria-label*="More"], button[aria-label*="more"], [icon="more_vert"] button, #button.ytd-menu-renderer button');
+                
+                if (!moreActionsButton) {
+                    // Final fallback for "More" button: look for the menu renderer
+                    const menuRenderer = actionsContainer.querySelector('ytd-menu-renderer');
+                    if (menuRenderer) {
+                         moreActionsButton = menuRenderer.querySelector('yt-icon-button, button');
+                    }
+                }
+
+                if (!moreActionsButton) throw new Error("Could not find the 'More actions' button. The video might not have a transcript available.");
                 moreActionsButton.click();
 
                 const menuPopup = await waitForElement("ytd-menu-popup-renderer");
                 const menuItems = menuPopup.querySelectorAll("ytd-menu-service-item-renderer, tp-yt-paper-item");
                 let showTranscriptButtonInMenu = null;
                 for (const item of menuItems) {
-                    const textElement = item.querySelector('yt-formatted-string, .yt-core-attributed-string');
-                    if (textElement && textElement.textContent.trim().toLowerCase().includes("transcript")) {
+                    const textContent = (item.textContent || "").toLowerCase();
+                    if (textContent.includes("transcript") || textContent.includes("transcripción") || textContent.includes("transcrição")) {
                         showTranscriptButtonInMenu = item;
                         break;
                     }
                 }
-                if (!showTranscriptButtonInMenu) throw new Error("Could not find the 'Show transcript' option in the menu.");
+                if (!showTranscriptButtonInMenu) throw new Error("Transcript option not found in menu. This video likely does not have a transcript.");
                 showTranscriptButtonInMenu.click();
             }
             
@@ -351,6 +361,8 @@ const injectSummarizeButton = () => {
         '#actions.ytd-watch-metadata',
         '#actions-inner',
         '#top-row.ytd-watch-metadata',
+        'ytd-watch-metadata #owner',
+        '#owner-and-teaser',
         '#info-contents #menu',
     ];
 

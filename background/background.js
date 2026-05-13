@@ -1,5 +1,5 @@
-// Import the Google GenAI SDK as an ES module from a compatible CDN
-import { GoogleGenAI, Type } from 'https://cdn.jsdelivr.net/npm/@google/genai/+esm';
+// Import the Google GenAI SDK from the installed package
+import { GoogleGenAI, Type } from '@google/genai';
 import { generateSummary } from '../services/geminiService.js';
 
 /**
