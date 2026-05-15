@@ -10,15 +10,38 @@
         "displayName": { "type": "string", "description": "User's full name" },
         "photoURL": { "type": "string", "description": "User's profile picture URL" },
         "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of account creation" },
-        "lastLogin": { "type": "string", "format": "date-time", "description": "Timestamp of last login" }
+        "lastLogin": { "type": "string", "format": "date-time", "description": "Timestamp of last login" },
+        "subscriptionId": { "type": "string", "description": "Link to the subscription document" },
+        "tier": { "enum": ["free", "pro", "enterprise"], "type": "string" },
+        "credits": { "type": "number", "description": "Remaining processing credits" }
       },
       "required": ["uid", "email"]
+    },
+    "Subscription": {
+      "title": "Subscription",
+      "description": "Payment records and status.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "planId": { "type": "string" },
+        "status": { "enum": ["active", "expired", "pending"], "type": "string" },
+        "razorpayOrderId": { "type": "string" },
+        "razorpayPaymentId": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "planId", "status"]
     }
   },
   "firestore": {
     "users/{userId}": {
       "schema": "User",
       "description": "User profiles indexed by their Firebase internal UID."
+    },
+    "subscriptions/{subId}": {
+      "schema": "Subscription",
+      "description": "Payment and billing records."
     }
   }
 }

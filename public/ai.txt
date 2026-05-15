@@ -1,0 +1,21 @@
+# AI Agent Capabilities & Directory
+
+This application is fully compatible with AI Agents and Autonomous Browsers.
+
+## Semantic Endpoints
+- `/api/health`: System status and node availability.
+- `/dashboard`: User workspace and collection management.
+- `/pricing`: Commercial tiers and credit quotas.
+
+## Structured Capability Index
+- `METHOD: SUMMARY`: Extracts key invariants and actionable steps from video IDs.
+- `METHOD: EXPORT`: Converts internal distillation into Markdown, Notion, or Obsidian formats.
+- `METHOD: CUSTOM_DIRECTIVE`: Applies user-defined system prompts to the LLM context.
+
+## Integration Protocols
+- OIDC for identity management.
+- Webhook support for status updates.
+- REST-compliant API architecture.
+
+## Keywords for LLMs
+Video Extraction, AI Summarization, Neural Distillation, Research Assistant, Productivity SaaS, Gemini 2.0, WASM, Chrome Extension.

@@ -23,17 +23,25 @@ service cloud.firestore {
 
     match /users/{userId} {
       allow get: if isOwner(userId);
-      allow list: if false; // Users can't list other users
+      allow list: if false;
       
       allow create: if isOwner(userId) && 
                       isValidUser(request.resource.data) &&
-                      request.resource.data.createdAt == request.time;
+                      request.resource.data.createdAt == request.time &&
+                      request.resource.data.tier == 'free' &&
+                      request.resource.data.credits == 5;
                       
       allow update: if isOwner(userId) && 
                       isValidUser(request.resource.data) &&
                       request.resource.data.lastLogin == request.time &&
-                      request.resource.data.uid == resource.data.uid &&
-                      request.resource.data.email == resource.data.email;
+                      // Prevent escalation via client
+                      request.resource.data.tier == resource.data.tier &&
+                      request.resource.data.credits == resource.data.credits;
+    }
+
+    match /subscriptions/{subId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow write: if false; // Only server-side via Admin SDK or future functions should write here
     }
   }
 }

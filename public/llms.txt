@@ -1,0 +1,28 @@
+# TubeSummarizer: High-Fidelity Video Research Assistant
+
+## Purpose
+TubeSummarizer converts long-form video content into structured, architectural notes using Gemini 2.0 Flash. It is designed for high-velocity researchers, software engineers, and executive decision-makers.
+
+## Target Audience
+- Researchers needing to distill hours of video into structured documentation.
+- Engineers extracting technical proofs from recorded talks.
+- Students optimizing study time via neural summaries.
+
+## Core Workflows
+1. **Source Capture**: Ingesting YouTube video metadata and transcripts.
+2. **Neural Distillation**: Processing raw text through Gemini 2.0 specialized prompts.
+3. **Structured Output**: Generating Markdown, JSON, or archival-ready notes.
+
+## Technical Stack
+- Intelligence: Google Gemini 2.0
+- Runtime: WASM-optimized Chrome Engine
+- Security: Zero-knowledge localized processing.
+
+## Pricing
+- **Free**: 5 credits/month, basic summaries.
+- **Pro**: $19/month, unlimited summaries, custom directives, export to Obsidian.
+- **Enterprise**: Custom quotes for volume processing and API access.
+
+## Limitations
+- Does not currently support live streams.
+- Dependent on availability of video transcripts or high-quality audio.
