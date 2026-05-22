@@ -83,7 +83,7 @@ export const LandingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
           >
             <button 
               onClick={handleCTA}
@@ -91,9 +91,33 @@ export const LandingPage = () => {
             >
               {user ? "Go to Dashboard" : "Start Distilling Free"}
             </button>
-            <button className="px-12 py-5 border border-white/10 text-white/60 font-bold text-xs tracking-widest uppercase hover:bg-white/5 hover:text-white transition-all rounded-xl">
+            <button 
+              onClick={() => {
+                 const el = document.getElementById('demo-video');
+                 if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-12 py-5 border border-white/10 text-white/60 font-bold text-xs tracking-widest uppercase hover:bg-white/5 hover:text-white transition-all rounded-xl"
+            >
               Live Demo
             </button>
+          </motion.div>
+
+          <motion.div
+            id="demo-video"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="w-full max-w-4xl mx-auto rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 bg-white/5 aspect-video relative z-20 group cursor-pointer"
+          >
+             <iframe 
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/n7_rxA2qhQY?autoplay=0&rel=0" 
+                title="TubeSummarizer Demo" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen
+              />
           </motion.div>
         </div>
       </section>
